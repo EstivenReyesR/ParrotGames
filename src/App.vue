@@ -1,5 +1,6 @@
-<script setup>
+<script >
 import { RouterLink, RouterView } from 'vue-router'
+ 
 </script>
 
 <template>
@@ -31,8 +32,8 @@ import { RouterLink, RouterView } from 'vue-router'
             </router-link>
             </div>
           </div>
-          <nav class="navbar" id="navegation menu">
-          </nav>
+          <!-- <nav class="navbar" id="navegation menu">
+          </nav> -->
         </div>
       </header>
     </div>

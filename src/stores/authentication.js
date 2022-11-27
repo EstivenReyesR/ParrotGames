@@ -1,6 +1,14 @@
 import { defineStore } from "pinia";
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "firebase/auth";
+import {
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
+    signOut,
+    getAuth,
+    onAuthStateChanged,
+    deleteUser,
+} from "firebase/auth";
 import { auth } from "../firebase/config";
+import { router } from "../router/index";
 
 export const useAuthenticationStore = defineStore("authentication", {
     state: () => ({
@@ -8,7 +16,7 @@ export const useAuthenticationStore = defineStore("authentication", {
     }),
 
     getters: {
-        getProducts: (state) => [...state.products],
+        getUser: (state) => [...state.user],
     },
 
     actions: {
@@ -18,6 +26,7 @@ export const useAuthenticationStore = defineStore("authentication", {
                     // Signed in
                     const user = userCredential.user;
                     console.log("logged user", user);
+                    router.push("/");
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -46,13 +55,38 @@ export const useAuthenticationStore = defineStore("authentication", {
             }
         },
 
-        logOut() {
+        async logOut() {
             signOut(auth)
                 .then(() => {
                     console.log("User out");
                 })
                 .catch((error) => {
                     alert(error);
+                });
+        },
+        async deleteAccount() {
+            deleteUser(auth.currentUser)
+                .then(() => {
+                    console.log("eliminado");
+                    router.push("/");
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+        checkUser() {
+            (auth = getAuth()),
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        // User is signed in, see docs for a list of available properties
+                        // https://firebase.google.com/docs/reference/js/firebase.User
+                        const uid = user.uid;
+                        console.log(user.email);
+                    } else {
+                        // User is signed out
+                        // ...
+                        console.log("no registrado");
+                    }
                 });
         },
     },

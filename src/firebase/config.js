@@ -3,6 +3,7 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { useAuthenticationStore } from "../stores/authentication";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
     apiKey: "AIzaSyCn5HFOsrKLGpME2QsGUcM6eHD2jhKXu4Y",
@@ -19,6 +20,7 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 // Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth(app);
+const db = getFirestore(app);
 
 onAuthStateChanged(auth, (user) => {
     const authStore = useAuthenticationStore();

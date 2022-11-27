@@ -12,12 +12,19 @@ import { mapStores } from "pinia";
     methods:{
         signIn(e) {
                 e.preventDefault()
+                console.log("presiono iniciar");
                 this.authenticationStore.signIn(this.email, this.password)
             },
         logOut(e) {
                 e.preventDefault()
+                console.log("presiono cerrar");
                 this.authenticationStore.logOut()
-            }
+            },
+        deleteaccount(e) {
+            e.preventDefault()
+            console.log("presiono borrar");
+            this.authenticationStore.deleteAccount()
+        }
     },
     computed: {
         ...mapStores(useAuthenticationStore)
@@ -46,8 +53,12 @@ import { mapStores } from "pinia";
                 <button class="button-style btn"  @click="signIn">Login</button>
             </div>
             <div class="log out">
-            <h1 class="text" @click="logOut">Closed session</h1>
-                <button class="button-style1 btn2">log out</button>
+            <h1 class="text">Closed session</h1>
+                <button class="button-style1 btn2"  @click="logOut">log out</button>
+            </div>
+            <div class="cerraCuenta">
+            <h1 class="text">cerrar cuenta</h1>
+                <button class="button-style1 btn2"  @click="deleteaccount">cerrar cuenta</button>
             </div>
             <div class="icon">
                 <p class="text">Or sign up using</p>
