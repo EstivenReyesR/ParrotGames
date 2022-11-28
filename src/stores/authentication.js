@@ -50,6 +50,7 @@ export const useAuthenticationStore = defineStore("authentication", {
             try {
                 const userCredential = await createUserWithEmailAndPassword(auth, email, password);
                 console.log("User create", userCredential.user);
+                this.user = userCredential.user;
             } catch (error) {
                 alert(error);
             }

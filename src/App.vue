@@ -15,7 +15,7 @@ import { RouterLink, RouterView } from 'vue-router'
           </div>
 
           <!-- here are some items for navagating between the pages -->
-          <div class="textItems">
+          <div class="textItems1">
             <div class="shoppingCar">
               <router-link to="/Car">
               <img src="./assets/img/shoppingCar.svg" alt="ShoppingCar">
@@ -164,6 +164,13 @@ import { RouterLink, RouterView } from 'vue-router'
       width: 50%;
       display: flex;
       align-items: center
+    }
+
+    .textItems1{
+      width: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
     }
 
     .shoppingCar{
