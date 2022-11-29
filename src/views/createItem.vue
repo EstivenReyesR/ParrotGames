@@ -1,4 +1,5 @@
 <script>
+    import {productsDB} from "../stores/Uploadproducts.js"
     import{ mapStores} from "pinia";
     import { shopItem } from "../stores/products";
     // import { storage } from "../firebaseconf"
@@ -8,7 +9,7 @@
     export default{
         components: {
         },
-        information(){
+        data(){
             return{
                 // image: [],
                 title: "",
@@ -21,7 +22,7 @@
         },
 
         computed: {
-            ...mapStores(shopItem),
+            ...mapStores(productsDB),
         },
         
         methods: {
@@ -35,7 +36,7 @@
                     imgUrl: this.imgUrl
                 };
 
-                this.productsStore.newProduct(newProduct);
+                this.productsDBStore.UploadProduct(newProduct)
 
                 this.title ='';
                 this.price ='';

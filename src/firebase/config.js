@@ -37,4 +37,4 @@ onAuthStateChanged(auth, (user) => {
     }
 });
 
-export { auth };
+export { auth, db };

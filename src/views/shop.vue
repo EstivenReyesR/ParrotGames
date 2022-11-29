@@ -1,69 +1,69 @@
 <script>
-    import{
-        mapStores
-    } from "pinia";
-    import{
-        shopItem
-    }from "../stores/products.js";
-    export default{
-        data(){
-            return{
-                out:[],
-                sortby: 'default',
-                gender: '',
-                discount: null, 
-            };
-        },      
-        name: 'App',
+import { mapStores } from "pinia";
+import { shopItem } from "../stores/products.js";
+import { productsDB } from "../stores/Uploadproducts.js";
 
-        computed: {
-            ...mapStores(shopItem),
+export default {
+    data() {
+        return {
+            out: [],
+            sortby: "default",
+            gender: "",
+            discount: null,
+        };
+    },
+    name: "App",
 
-            items(){
-                let filterItems= this.productsStore.getProducts;
-                if(this.sortby =="lower"){
-                    filterItems = filterItems.sort((a, b) => {
-                
-                        return a.price - b.price;});
-                }
-                if(this.sortby =="highest"){
-                    filterItems = filterItems.sort((a, b) => {
-                
-                        return b.price - a.price;});
-                }
+    computed: {
+        ...mapStores(productsDB),
 
-                if (this.gender != "") {
-                    filterItems = filterItems.filter(item => item.type == this.gender);
-                }
-                if (this.discount) {
-                    console.log(filterItems)
-                    filterItems = filterItems.filter(item => item.isDiscounted == true);
-                }
-                return filterItems;
-            },
+        items() {
+            let filterItems = this.productsDBStore.getProductsDB;
+            if (this.sortby == "lower") {
+                filterItems = filterItems.sort((a, b) => {
+                    return a.price - b.price;
+                });
+            }
+            if (this.sortby == "highest") {
+                filterItems = filterItems.sort((a, b) => {
+                    return b.price - a.price;
+                });
+            }
+
+            if (this.gender != "") {
+                filterItems = filterItems.filter((item) => item.type == this.gender);
+            }
+            if (this.discount) {
+                console.log(filterItems);
+                filterItems = filterItems.filter((item) => item.isDiscounted == true);
+            }
+            return filterItems;
         },
+    },
 
-        mounted(){
-            this.out = this.items;
-            this.productsStore.loadProducts();
-        },
-    }
+    mounted() {
+        this.productsDBStore.getProducts();
+        this.out = this.items;
+
+        console.log(this.productsDBStore.getProductsDB);
+    },
+};
 </script>
 <template>
     <section class="section__banner">
         <figure class="section--fig">
-            <img class="figure--img" src="../assets/img/bannershop.png" alt="banner">
+            <img class="figure--img" src="../assets/img/bannershop.png" alt="banner" />
         </figure>
     </section>
 
-<!-- Filters -->
+    <!-- Filters -->
     <section class="products">
         <div class="products__content">
             <h1 class="products__title">Participate in thematic forums of your favorite games.</h1>
             <div class="products__filter">
                 <h2 class="products__subtitle">Find your product</h2>
-                <input type="text" class="products__search" placeholder="Search" id="keyboard">
-                
+                <input type="text" class="products__search" placeholder="Search" id="keyboard" />
+
                 <div class="products__select">
                     <p class="products__text">Price</p>
                     <select name="filter" class="product__hl" id="lowertohighest" v-model="sortby">
@@ -84,189 +84,179 @@
                         <option value="platform">platform</option>
                     </select>
                     <div class="products__select">
-                    <button class="product__button" v-on:click="discount = !discount">Discount</button>
+                        <button class="product__button" v-on:click="discount = !discount">Discount</button>
+                    </div>
                 </div>
-                </div>
-
-               
             </div>
         </div>
-        
     </section>
 
     <section class="products__cards" id="products">
         <div class="Card">
-            <RouterLink v-for="product in items" :key="product.name" :to="`/productView/${product.name}`" class="yes">
-                    <div class="Card__content">
-                        <img :src='product.image' alt="preview" class="Card__img">
-                        
-                        <div class="Card__text">
-                            <h2 class="Card--h2">{{ product.title }}</h2> 
-                            <div class="Card--box">
-                                <p class="Card--text">{{ product.price}}$</p>
-                                <button class="Card--button">Buy</button> 
-                            </div>
-                             
-                        </div>
-                        <!-- <p class="Card--text">{{ product.type}}</p> -->
-                        
-                        
-                    </div>
+            <RouterLink v-for="product in items" :key="product.name" :to="`/productView/${product.id}`" class="yes">
+                <div class="Card__content">
+                    <img :src="product.image" alt="preview" class="Card__img" />
 
-                </RouterLink>
+                    <div class="Card__text">
+                        <h2 class="Card--h2">{{ product.title }}</h2>
+                        <div class="Card--box">
+                            <p class="Card--text">{{ product.price }}$</p>
+                            <button class="Card--button">Buy</button>
+                        </div>
+                    </div>
+                    <!-- <p class="Card--text">{{ product.type}}</p> -->
+                </div>
+            </RouterLink>
         </div>
     </section>
 </template>
 
 <style lang="scss">
-    
-    $blue: #1569DB;
-    $blue2: #0045A4;
-    $gray: #2E2E2E;
-    $nav: #232323;
-    
-    body{
-        background-color: $gray;
-        font-family: satoshi;
-        color: white;
-    }
+$blue: #1569db;
+$blue2: #0045a4;
+$gray: #2e2e2e;
+$nav: #232323;
 
-    .section__banner{
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
-        justify-content: center;
-        padding-top: 250px;
-    }
+body {
+    background-color: $gray;
+    font-family: satoshi;
+    color: white;
+}
 
-    .products{
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: column;
-    }
+.section__banner {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 250px;
+}
 
-    .products__content{
-       display: flex;
-       flex-wrap: wrap;
-       flex-direction: column;
-       padding: 50px;
-    }
-    .products__title{
-        text-align: center;
-        font-size: 1.7em;
-        padding: 50px;
-    }
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
 
-    .products__filter{
-        align-content: center;
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
-        padding: 50px 100px;
-    }
+.products__content {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    padding: 50px;
+}
+.products__title {
+    text-align: center;
+    font-size: 1.7em;
+    padding: 50px;
+}
 
-    .products__subtitle{
-        text-align: start;
-        font-size: 1.7em;
-        font-weight: bold;
-        padding: 20px 0px;
-    }
+.products__filter {
+    align-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    padding: 50px 100px;
+}
 
-    .products__search{
-        width: 100%;
-        padding: 20px 30px;
-        border-radius: 10px;
-        margin-block-end: 20px;
-        justify-content: center;
-        align-items: center;
-    }
+.products__subtitle {
+    text-align: start;
+    font-size: 1.7em;
+    font-weight: bold;
+    padding: 20px 0px;
+}
 
-    .products__select{
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        font-size: 1.5em;
-        width: 15%;
-        padding: 0px 10px;
-    }
+.products__search {
+    width: 100%;
+    padding: 20px 30px;
+    border-radius: 10px;
+    margin-block-end: 20px;
+    justify-content: center;
+    align-items: center;
+}
 
-    .Card__img{
-        width: 100%;
-    }
+.products__select {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    font-size: 1.5em;
+    width: 15%;
+    padding: 0px 10px;
+}
 
-    .product__button{
-        padding: 10px 45px;
-        border-radius: 5px;
-        margin-left: 50px;
-        color: white;
-        background-color: $blue;
-        cursor: pointer;
-        border: none;
-        outline: none;
-    }
+.Card__img {
+    width: 100%;
+}
 
-    .products__cards{
-        align-items: center;
-        background-color: #363636;
-        width: 80%;
-        padding: 100px 0px;
-        margin-left: 180px;
-        border-radius: 40px;
-    }
+.product__button {
+    padding: 10px 45px;
+    border-radius: 5px;
+    margin-left: 50px;
+    color: white;
+    background-color: $blue;
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
 
-    .Card{
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        width: 100%;
-    }
-    .Card__content{
-        display: flex;
-        flex-direction: column;
-        font-family: satoshi;
-        padding: 0px;
-        background-color: #1b1b1b;
-        border-radius: 25px;
-        margin: 20px;
-    }
-    .Card--button{
-        color: white;
-        background-color: $blue;
-        padding: 10px 45px;
-        border-radius: 5px;
-        outline: none;
-        border: none;
-    }
+.products__cards {
+    align-items: center;
+    background-color: #363636;
+    width: 80%;
+    padding: 100px 0px;
+    margin-left: 180px;
+    border-radius: 40px;
+}
 
-    .Card--box{
-        display: flex;
-        flex-wrap: wrap;
-        padding: 30px 0px;
-    }
+.Card {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
+.Card__content {
+    display: flex;
+    flex-direction: column;
+    font-family: satoshi;
+    padding: 0px;
+    background-color: #1b1b1b;
+    border-radius: 25px;
+    margin: 20px;
+}
+.Card--button {
+    color: white;
+    background-color: $blue;
+    padding: 10px 45px;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+}
 
-    .Card__text{
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
-        justify-content: space-between;
+.Card--box {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 30px 0px;
+}
 
-    }
-    .Card--text{
-        display: flex;
-        width: 20%;
-        margin-left: 20px;
-        font-size: 1.5em;
-        color: white;
-        padding: 0px 60px;
-    }
+.Card__text {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.Card--text {
+    display: flex;
+    width: 20%;
+    margin-left: 20px;
+    font-size: 1.5em;
+    color: white;
+    padding: 0px 60px;
+}
 
-    .Card--h2{
-        color: white;
-        font-size: 2em;
-        padding: 0px 60px;
-        margin-top: 20px;
-        font-weight: bold;
-    }
-    
+.Card--h2 {
+    color: white;
+    font-size: 2em;
+    padding: 0px 60px;
+    margin-top: 20px;
+    font-weight: bold;
+}
 </style>
