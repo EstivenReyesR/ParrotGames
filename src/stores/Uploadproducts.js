@@ -39,6 +39,17 @@ export const productsDB = defineStore("productsDB", {
             }
         },
 
+        async editProduct(productData, id) {
+            const docRef = doc(collection(db, `products`), id);
+
+            try {
+                await setDoc(docRef, productData);
+                alert("Product uploaded");
+            } catch (error) {
+                console.log(error);
+            }
+        },
+
         async getProducts() {
             const querySnapshot = await getDocs(collection(db, "products"));
             querySnapshot.forEach((doc) => {

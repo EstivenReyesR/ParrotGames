@@ -37,7 +37,9 @@ export default {
                 <p class="title">Units available</p>
                 <p class="information">{{ this.current.isDiscounted }}</p>
                 <button class="buy">Buy</button>
-                <button class="edit">edit</button>
+                <RouterLink :key="this.current.title" :to="`/editItem/${this.current.id}`">
+                    <button class="edit">edit</button>
+                </RouterLink>
             </div>
         </div>
     </section>
@@ -49,7 +51,7 @@ export default {
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
-    background-color: #fff;
-    color: black;
+    background-color: #2e2e2e;
+    color: rgb(255, 255, 255);
 }
 </style>

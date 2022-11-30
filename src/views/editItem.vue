@@ -25,8 +25,8 @@ export default {
     },
 
     methods: {
-        createNewProduct() {
-            const newProduct = {
+        editProduct() {
+            let productInfo = {
                 title: this.title,
                 price: this.price,
                 units: this.units,
@@ -35,7 +35,7 @@ export default {
                 imgUrl: this.imgUrl,
             };
 
-            this.productsDBStore.UploadProduct(newProduct);
+            this.productsDBStore.editProduct(productInfo, this.$route.params.productId);
 
             this.title = "";
             this.price = "";
@@ -110,7 +110,7 @@ export default {
                         <input type="file" id="img" class="create__images" multiple="multiple" @change="readImage" />
                     </div>
                     <div class="create__btn">
-                        <button type="submit" class="create__upload" @click="(e) => createNewProduct()">Public</button>
+                        <button type="submit" class="create__upload" @click="(e) => editProduct()">Public</button>
                     </div>
                 </form>
             </div>
