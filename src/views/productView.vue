@@ -30,11 +30,11 @@ export default {
             <div class="view__info">
                 <p class="r">{{ $route.params.productId }}</p>
                 <p class="information">{{ this.current.description }}</p>
-                <p class="title">Title</p>
+                <p class="titleView">Title</p>
                 <p class="information">{{ this.current.type }}</p>
-                <p class="title">Price</p>
+                <p class="priceView">Price</p>
                 <p class="information">{{ this.current.price }}</p>
-                <p class="title">Units available</p>
+                <p class="unitView">Units available</p>
                 <p class="information">{{ this.current.isDiscounted }}</p>
                 <button class="buy">Buy</button>
                 <RouterLink :key="this.current.title" :to="`/editItem/${this.current.id}`">
@@ -47,11 +47,49 @@ export default {
 
 <style lang="scss">
 .view__section {
+    background-color: #2e2e2e;
+}
+
+.view__content {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    gap: 131px;
+
+    position: absolute;
+    width: 1573px;
+    height: 826px;
+    left: 174px;
+    top: 161px;
+
+    background: #434343;
+    border-radius: 25px;
+}
+
+.view__section {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
     background-color: #2e2e2e;
     color: rgb(255, 255, 255);
+}
+.titleView {
+}
+
+.buy {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 18px 70px;
+    gap: 10px;
+    color: white;
+    background: #1569db;
+    border-radius: 10px;
+    border: none;
+    outline: none;
 }
 </style>
