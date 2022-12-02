@@ -22,19 +22,24 @@ import forums from "../views/forums.vue";
             <div class="item__container">
                 <figure class="item--shop">
                     <nav id="app">
-                        <router-link to="/shop"> <img src="../assets/img/shopItem.png" alt="shopItem" /></router-link>
+                        <router-link to="/shop">
+                            <img class="img__item" src="../assets/img/shopItem.png" alt="shopItem"
+                        /></router-link>
                         <p class="item--text">Buy video games and support your favorite development.</p>
+                        <p class="item--text1">Shop</p>
                     </nav>
                 </figure>
                 <figure class="item--shop">
-                    <img src="../assets/img/communityItem.png" alt="communityItem" />
+                    <img class="img__item" src="../assets/img/communityItem.png" alt="communityItem" />
                     <p class="item--text">Socializate with another people that share your passions.</p>
+                    <p class="item--text1">Community</p>
                 </figure>
                 <figure class="item--shop">
                     <router-link to="/createItem">
-                        <img src="../assets/img/createGameItem.png" alt="createGameItem" />
+                        <img class="img__item" src="../assets/img/createGameItem.png" alt="createGameItem" />
                     </router-link>
                     <p class="item--text">Create a developer profile and publish your games to the public.</p>
+                    <p class="item--text1">Upload</p>
                 </figure>
             </div>
         </section>
@@ -66,6 +71,10 @@ body {
 .page {
     width: 100%;
     font-family: satoshi;
+}
+
+.item--text1 {
+    display: none;
 }
 
 .landing {
@@ -158,20 +167,71 @@ body {
         width: 100%;
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 0;
+        justify-content: none;
+        align-items: none;
+        padding: 0px 50px;
 
         border-radius: 0px 15px 15px 0px;
 
         &__content {
+            width: 100%;
             display: flex;
+            flex-direction: row;
         }
+
+        &--h2 {
+            font-size: 0.9em;
+        }
+
+        &--h1 {
+            font-size: 1.5em;
+            padding: 50px 0px;
+            align-items: inherit;
+        }
+
+        &--logo {
+            display: flex;
+            width: 40%;
+            padding: 0px 0px;
+            margin-top: 50px;
+        }
+
+        &--text {
+            font-size: 0.9em;
+            padding: 50px 0px;
+            text-align: inherit;
+        }
+    }
+
+    .img__item {
+        width: 76px;
     }
 
     .item {
         display: flex;
         width: 100%;
+        padding: 70px 0px;
+    }
+
+    .item--shop {
+        width: 30%;
+        margin: 0px;
+    }
+
+    .item__container {
+        width: 100%;
+        margin: 0px;
+    }
+
+    .item--text1 {
+        display: flex;
+        justify-content: center;
+        font-size: 0.9em;
+    }
+
+    .item--text {
+        display: none;
+        padding: 0px 0px;
     }
 }
 </style>

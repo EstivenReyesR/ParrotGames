@@ -206,5 +206,61 @@ $nav: #232323;
 }
 
 @media all and (max-width: 844px) {
+    .community {
+        padding: 20px;
+    }
+
+    .community--h2 {
+        padding: 5px 20px;
+        font-size: 0.8em;
+        text-align: center;
+    }
+
+    .community--h3 {
+        width: 100%;
+    }
+
+    .community--title {
+        margin-block-end: 0px;
+    }
+
+    .community--bg {
+        border-radius: 10px;
+    }
+
+    .community--subtitle {
+        padding: 16px 60px;
+        margin-block-end: 95px;
+    }
+
+    .community .community__figcation {
+        bottom: 70px;
+        padding: 17px 14px;
+        border-end-start-radius: 10px;
+        border-end-end-radius: 10px;
+    }
+
+    .comunity--img {
+        width: 100%;
+    }
+
+    .owngame {
+        background-image: url("../assets/img/mobile/publicgameMobile.png");
+    }
+
+    .owngame--button {
+        margin: 0px;
+        margin: 12no0px;
+        font-size: 12px;
+        padding: 12px 14px;
+    }
+
+    .community .community__Buton {
+        width: 42%;
+        margin: 34px;
+        margin-top: -68px;
+        font-size: 0.7em;
+        padding: 8px;
+    }
 }
 </style>
