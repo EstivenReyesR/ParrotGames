@@ -1,7 +1,8 @@
 import { defineStore } from "pinia";
-import { router } from "../router/index";
-import { db } from "../firebase/config";
+// import { router } from "../router/index";
+import { db, storage } from "../firebase/config";
 import { doc, setDoc, collection, getDocs, getDoc } from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 export const productsDB = defineStore("productsDB", {
     state: () => ({
@@ -37,6 +38,24 @@ export const productsDB = defineStore("productsDB", {
             } catch (error) {
                 console.log(error);
             }
+        },
+
+        async UploadPhoto(file, filename) {
+            const storageRef = ref(storage, `gameImg/${filename}`);
+            let imgUrl = "test";
+
+            await uploadBytes(storageRef, file).then(async (snapshot) => {
+                await getDownloadURL(storageRef)
+                    .then((url) => {
+                        // Or inserted into an <img> element
+                        imgUrl = url;
+                    })
+                    .catch((error) => {
+                        // Handle any errors
+                    });
+            });
+
+            return imgUrl;
         },
 
         async editProduct(productData, id) {

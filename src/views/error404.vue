@@ -10,7 +10,7 @@ export default {
             <h2 class="error-subtitle">¡¡LOOKS LIKE SOMETING IS WRONG!!</h2>
             <P class="error-text">It seems that the page was not found, check that the url you have is correct</P>
             <figure class="gif">
-                <img src="../assets/img/CGBaddiesErrorPoses.gif" alt="gif" />
+                <img class="gifMod" src="../assets/img/CGBaddiesErrorPoses.gif" alt="gif" />
             </figure>
         </div>
     </body>
@@ -19,7 +19,7 @@ export default {
 <style lang="scss">
 .container {
     background-color: #2e2e2e;
-    padding: 300px 0px;
+    padding: 120px 0px;
 }
 
 .error-title {
@@ -43,14 +43,14 @@ export default {
     font-style: normal;
     font-weight: 700;
     font-size: 3em;
-    line-height: 69px;
+    line-height: 49px;
     color: #1569db;
 }
 
 .error-text {
     display: flex;
     justify-content: center;
-    padding-top: 35px;
+    padding-top: 15px;
     font-family: "Poppins";
     font-style: normal;
     font-weight: 400;
@@ -64,6 +64,33 @@ export default {
 .gif {
     display: flex;
     justify-content: center;
-    padding-top: 50px;
+    padding-top: 10px;
+}
+
+.gifMod {
+    width: 38%;
+}
+
+@media all and (max-width: 844px) {
+    .gifMod {
+        width: 100%;
+    }
+
+    .error-title {
+        font-size: 3.5em;
+        line-height: 55px;
+    }
+
+    .error-subtitle {
+        display: flex;
+        line-height: 33px;
+        font-size: 1em;
+    }
+
+    .error-text {
+        font-size: 16px;
+        line-height: auto;
+        text-align: center;
+    }
 }
 </style>

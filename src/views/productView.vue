@@ -28,18 +28,23 @@ export default {
                 <img :src="this.current.image" alt="preview" class="view__img" />
             </figure>
             <div class="view__info">
-                <p class="r">{{ $route.params.productId }}</p>
+                <!-- <p class="r">{{ $route.params.productId }}</p> -->
+                <p class="titleView">{{ this.current.title }}</p>
                 <p class="information">{{ this.current.description }}</p>
-                <p class="titleView">Title</p>
                 <p class="information">{{ this.current.type }}</p>
                 <p class="priceView">Price</p>
                 <p class="information">{{ this.current.price }}</p>
-                <p class="unitView">Units available</p>
+                <!-- <p class="unitView">Units available</p> -->
                 <p class="information">{{ this.current.isDiscounted }}</p>
-                <button class="buy">Buy</button>
-                <RouterLink :key="this.current.title" :to="`/editItem/${this.current.id}`">
-                    <button class="edit">edit</button>
-                </RouterLink>
+
+                <div class="buttons__items">
+                    <button class="buy">Buy</button>
+                </div>
+                <div class="buttons__items">
+                    <RouterLink :key="this.current.title" :to="`/editItem/${this.current.id}`">
+                        <button class="edit">edit</button>
+                    </RouterLink>
+                </div>
             </div>
         </div>
     </section>
@@ -47,7 +52,9 @@ export default {
 
 <style lang="scss">
 .view__section {
+    display: flex;
     background-color: #2e2e2e;
+    justify-content: center;
 }
 
 .view__content {
@@ -55,15 +62,11 @@ export default {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 0px;
+    width: 80%;
+    padding: 300px 0px;
+    margin-top: 150px;
+    margin-block-end: 150px;
     gap: 131px;
-
-    position: absolute;
-    width: 1573px;
-    height: 826px;
-    left: 174px;
-    top: 161px;
-
     background: #434343;
     border-radius: 25px;
 }
@@ -79,12 +82,30 @@ export default {
 .titleView {
 }
 
+.buttons__items {
+    padding: 8px;
+}
+
+.edit {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 18px 170px;
+    gap: 10px;
+    color: white;
+    background: #333333;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+}
+
 .buy {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 18px 70px;
+    padding: 18px 170px;
     gap: 10px;
     color: white;
     background: #1569db;

@@ -1,6 +1,6 @@
 <script>
 import { mapStores } from "pinia";
-import { shopItem } from "../stores/products.js";
+// import { shopItem } from "../stores/products.js";
 import { productsDB } from "../stores/Uploadproducts.js";
 
 export default {
@@ -54,6 +54,9 @@ export default {
         <figure class="section--fig">
             <img class="figure--img" src="../assets/img/bannershop.png" alt="banner" />
         </figure>
+        <figure class="section--fig--mobile">
+            <img class="figure--img" src="../assets/img/mobile/shopSectionMobile.png" alt="banner" />
+        </figure>
     </section>
 
     <!-- Filters -->
@@ -83,6 +86,7 @@ export default {
                         <option value="OpenWorld">Open world</option>
                         <option value="platform">platform</option>
                     </select>
+
                     <div class="products__select">
                         <button class="product__button" v-on:click="discount = !discount">Discount</button>
                     </div>
@@ -95,7 +99,7 @@ export default {
         <div class="Card">
             <RouterLink v-for="product in items" :key="product.name" :to="`/productView/${product.id}`" class="yes">
                 <div class="Card__content">
-                    <img :src="product.image" alt="preview" class="Card__img" />
+                    <img v-bind:src="product.image" alt="preview" class="Card__img" />
 
                     <div class="Card__text">
                         <h2 class="Card--h2">{{ product.title }}</h2>
@@ -147,6 +151,10 @@ body {
     text-align: center;
     font-size: 1.7em;
     padding: 50px;
+}
+
+.section--fig--mobile {
+    display: none;
 }
 
 .products__filter {
@@ -258,5 +266,105 @@ body {
     padding: 0px 60px;
     margin-top: 20px;
     font-weight: bold;
+}
+
+.product__hl {
+    border-radius: 50px;
+    padding-left: 10px;
+    margin-left: 20px;
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 400;
+    background-color: #535353;
+    color: white;
+    outline: none;
+    border: none;
+}
+
+@media all and (max-width: 844px) {
+    .section--fig {
+        display: none;
+    }
+
+    .products__cards {
+        display: none;
+    }
+
+    .section--fig--mobile {
+        display: flex;
+        justify-content: center;
+    }
+
+    .products {
+        flex-wrap: wrap;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+    }
+
+    .products__content {
+        padding: 0px;
+    }
+
+    .products__title {
+        display: flex;
+        font-size: 12px;
+        justify-content: center;
+        text-align: center;
+        padding: 0px;
+        padding-top: 20px;
+    }
+
+    .products__subtitle {
+        font-size: 12px;
+    }
+
+    .products__search {
+        padding: 10px 20px;
+    }
+
+    .products__filter {
+        padding: 24px 40px;
+    }
+
+    .products__cards {
+        margin-left: 0px;
+        margin: 0;
+    }
+
+    .products__select {
+        display: flex;
+        flex-direction: row;
+        width: 20%;
+        font-size: 0.8em;
+        padding: 5px;
+    }
+
+    .product__hl {
+        border-radius: 50px;
+        padding-left: 0px;
+        margin-left: 0px;
+        width: 25%;
+        padding: 0px 20px;
+    }
+
+    .Card--text {
+        display: flex;
+        width: 20%;
+        margin-left: 0px;
+        font-size: 1.5em;
+        color: white;
+        padding: 0px 60px;
+    }
+
+    .product__button {
+        padding: 10px 10px;
+        margin-left: 0px;
+    }
+
+    .products__text {
+        padding: 0px;
+    }
 }
 </style>

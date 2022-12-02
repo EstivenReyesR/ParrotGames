@@ -45,6 +45,7 @@ import forums from "../views/forums.vue";
       </section> -->
     </div>
     <main>
+        <!-- <forums /> -->
         <forums />
     </main>
 </template>
@@ -151,7 +152,26 @@ body {
         font-size: 1.3em;
     }
 }
-// Samsung galaxy S8
-@media only screen and (min-width: 768px) {
+@media all and (max-width: 844px) {
+    .landing {
+        background-image: url("../assets/img/mobile/landingBgMobile.png");
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+
+        border-radius: 0px 15px 15px 0px;
+
+        &__content {
+            display: flex;
+        }
+    }
+
+    .item {
+        display: flex;
+        width: 100%;
+    }
 }
 </style>
